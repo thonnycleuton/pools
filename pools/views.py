@@ -25,3 +25,12 @@ def question(request, pk):
         'choices': choices,
     }
     return render(request, template_name, context)
+
+
+def result(request, pk):
+    choices = Choice.objects.filter(question_id__exact=pk)
+    template_name = 'results.html'
+    context = {
+        'choices': choices,
+    }
+    return render(request, template_name, context)

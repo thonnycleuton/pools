@@ -12,7 +12,7 @@
     <tbody>
         {% for choice in choices %}
             <tr>
-                <td>{{ choice.choice_text }}</td>
+                <td><a href="{% url 'pools:result' choice.id %}" >{{ choice.choice_text }}</a></td>
             </tr>
         {% endfor %}
     </tbody>

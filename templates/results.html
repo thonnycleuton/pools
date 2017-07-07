@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+{% load static %}
+<head>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+window.onload = function () {
+	var chart = new CanvasJS.Chart("chartContainer",
+	{
+		title:{
+			text: "Results"
+		},
+                animationEnabled: true,
+		data: [
+		{
+			type: "doughnut",
+			startAngle: 60,
+			toolTipContent: "{legendText}: {y} - <strong>#percent% </strong>",
+			showInLegend: true,
+			dataPoints: [
+                {% for choice in choices %}
+                    {y: {{ choice.votes }}, indexLabel: "{{ choice.choice_text }} #percent%", legendText: "{{ choice.choice_text }}" },
+                {% endfor %}
+			]
+		}
+		]
+	});
+	chart.render();
+	}
+</script>
+<script type="text/javascript" src="{% static 'js/canvasjs.min.js' %}"></script>
+</head>
+<body>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+</body>
+</html>
