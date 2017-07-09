@@ -34,3 +34,14 @@ def result(request, pk):
         'choices': choices,
     }
     return render(request, template_name, context)
+
+
+def vote(request, pk):
+    choices = Choice.objects.get(pk=pk)
+    choices.votes += 1
+    choices.save()
+    template_name = 'success.html'
+    context = {
+        'message': 'successfully saved. Thank you.',
+    }
+    return render(request, template_name, context)
