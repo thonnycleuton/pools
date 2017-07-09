@@ -10,7 +10,6 @@
       </tr>
     </thead>
     <tbody>
-      <p><a href="{% url 'pools:result' question.id %}" >Results</a></p>
         {% for choice in choices %}
             <tr>
                 <td>{{ choice.choice_text }}<a href="{% url 'pools:vote' choice.id %}" > Vote</a></td>
