@@ -7,13 +7,13 @@
     <tbody>
         <tr>
             <td>{{ question.question_text }}</a></td>
-            <td><a href="{% url 'pools:status' question.id %}">{% if question.closed %}Closed</a>{% else %}Open{% endif %}
+            <td><a href="{% url 'pools:status' question.id %}"  onclick="return confirm('Are you sure?')">{% if question.closed %}Closed</a>{% else %}Open{% endif %}
             <td>{{ question.pub_date }}</td>
         </tr>
 
         {% for choice in choices %}
             <tr>
-                <td>{{ choice.choice_text }}</td><td><a href="{% url 'pools:remove' choice.id %}" >Remover</a></td>
+                <td>{{ choice.choice_text }}</td><td><a href="{% url 'pools:remove' choice.id %}"  onclick="return confirm('Are you sure?')">Remover</a></td>
             </tr>
         {% endfor %}
     </tbody>

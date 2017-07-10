@@ -68,8 +68,10 @@ def manage(request, pk):
     return render(request, template_name, context)
 
 def remove(request, pk):
+
+    question = Question.objects.get(pk=pk)
     Choice.objects.get(pk=pk).delete()
-    return redirect('/')
+    return redirect('pools:manage', question.id)
 
 def status(request, pk):
 
