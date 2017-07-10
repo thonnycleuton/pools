@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from pools.models import Question, Choice
@@ -45,3 +45,35 @@ def vote(request, pk):
         'message': 'successfully saved. Thank you.',
     }
     return render(request, template_name, context)
+
+
+def manage(request, pk):
+
+    question = Question.objects.get(pk=pk)
+    template_name = 'admin.html'
+    context = {
+        'question': question,
+    }
+    return render(request, template_name, context)
+
+def manage(request, pk):
+
+    question = Question.objects.get(pk=pk)
+    choices = Choice.objects.filter(question_id__exact=pk)
+    template_name = 'admin.html'
+    context = {
+        'choices': choices,
+        'question': question,
+    }
+    return render(request, template_name, context)
+
+def remove(request, pk):
+    Choice.objects.get(pk=pk).delete()
+    return redirect('/')
+
+def status(request, pk):
+
+    question = Question.objects.get(pk=pk)
+    question.closed = not question.closed
+    question.save()
+    return redirect('pools:manage', question.id)

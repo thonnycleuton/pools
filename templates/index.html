@@ -15,7 +15,7 @@
         {% for question in questions %}
             <tr>
                 <td><a href="{% url 'pools:question' question.id %}">{{ question.question_text }}</a></td>
-                <td>{% if question.closed %}<a href="{% url 'pools:result' question.id %}">Fechado</a>{% else %}Aberto{% endif %}
+                <td>{% if question.closed %}<a href="{% url 'pools:result' question.id %}">Closed</a>{% else %}Open{% endif %}
                 </td>
                 <td>{{ question.pub_date }}</td>
             </tr>
